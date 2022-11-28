@@ -31,7 +31,7 @@ class Track(base):
     TrackId = Column(Integer, primary_key=True)
     Name = Column(String)
     AlbumId = Column(Integer, ForeignKey("album_table.AlbumId"))
-    MediaType = Column(Integer, primary_key=False)
+    MediaTypeId = Column(Integer, primary_key=False)
     GenerId = Column(Integer, primary_key=False)
     Composer = Column(String)
     milliseconds = Column(Integer)
@@ -75,13 +75,14 @@ base.metadata.create_all(db)
 #     print(album.AlbumId, album.Title, album.ArtistId, sep=" | ")
 
 # Query 6 - select all tracks where the Composer is "Queen" from the track table
+# SELECT * FROM "Track" WHERE "Composer" = 'Queen';
 tracks = session.query(Track).filter_by(Composer="Queen")
 for track in tracks:
     print(
         track.TrackId,
         track.Name,
         track.AlbumId,
-        track.MediaType,
+        track.MediaTypeId,
         track.GenerId,
         track.Composer,
         track.Milliseconds,
