@@ -33,7 +33,7 @@ track_table = Table(
     Column("MediaType", Integer, primary_key=False),
     Column("GenerId", Integer, primary_key=False),
     Column("Composer", String),
-    Column("milliseconds", Integer),
+    Column("Milliseconds", Integer),
     Column("Bytes", Integer),
     Column("UnitPrice", Float)
 
@@ -59,7 +59,7 @@ with db.connect() as connection:
     # Query 5 - select only the albums with "ArtistId" #51 on the "Album" table
     select_query = album_table.select().where(album_table.c.ArtistId == 51)
 
-    # Query 6 - select all tracks where the composer is "Queen" from the track table
+    # Query 6 - select all tracks where the Composer is "Queen" from the track table
     # select_query = track_table.select().where(track_table.c.Composer == "Queen")
 
     results = connection.execute(select_query)
