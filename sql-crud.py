@@ -5,13 +5,14 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 
-# executing the instructions from the "chinook" db
+# executing the instructions from the "chinook" database
 db = create_engine("postgresql:///chinook")
 base = declarative_base()
 
-# create a class-based model forthe "Programmer" table
+
+# create a class-based model for the "Programmer" table
 class Programmer(base):
-    __tablename__="programmer"
+    __tablename__ = "Programmer"
     id = Column(Integer, primary_key=True)
     first_name = Column(String)
     last_name = Column(String)
@@ -20,19 +21,17 @@ class Programmer(base):
     famous_for = Column(String)
 
 
-# instead of connecting to the db directly, we will ask for a session
+# instead of connecting to the database directly, we will ask for a session
 # create a new instance of sessionmaker, then point to our engine (the db)
 Session = sessionmaker(db)
-
-
 # opens an actual session by calling the Session() subclass defined above
 session = Session()
 
-# creating the db using declarative_base subclass
+# creating the database using declarative_base subclass
 base.metadata.create_all(db)
 
 
-# creating records on our programmer table
+# creating records on our Progammer table
 ada_lovelace = Programmer(
     first_name="Ada",
     last_name="Lovelace",
@@ -81,33 +80,30 @@ tim_berners_lee = Programmer(
     famous_for="World Wide Web"
 )
 
-snow_white = Programmer(
-    first_name="Snow",
-    last_name="White",
-    gender="F",
-    nationality="Irish",
-    famous_for="Dwarf Club"
+your_name = Programmer(
+    first_name="Your First Name",
+    last_name="Your Last Name",
+    gender="Your Gender",
+    nationality="Your Nationality",
+    famous_for="Celebrate Yourself Here"
 )
 
-
-# add each instance of our programmer to our session
+# add each instance of our programmers to our session
 session.add(ada_lovelace)
 session.add(alan_turing)
 session.add(grace_hopper)
 session.add(margaret_hamilton)
 session.add(bill_gates)
 session.add(tim_berners_lee)
-session.add(snow_white)
+session.add(your_name)
 
-# commit our session to the db
-session.commit()
 
-# updating single record
+# updating a single record
 # programmer = session.query(Programmer).filter_by(id=7).first()
 # programmer.famous_for = "World President"
 
-# commit our session to the db
-# session.commit()
+# commit our session to the database
+session.commit()
 
 
 # updating multiple records
@@ -146,7 +142,8 @@ session.commit()
 #     session.delete(programmer)
 #     session.commit()
 
-# query the db to find all Programmers
+
+# query the database to find all Programmers
 programmers = session.query(Programmer)
 for programmer in programmers:
     print(
